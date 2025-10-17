@@ -13,14 +13,14 @@ COPY requirements.txt .
 # تثبيت مكتبات Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# نسخ كامل المشروع (بما فيهم مجلد app)
+# نسخ كامل المشروع
 COPY . .
 
 # إنشاء مجلد اللوغز
 RUN mkdir -p logs
 
-# إضافة المسار الصحيح لـ Python
+# ضبط PYTHONPATH بشكل صحيح
 ENV PYTHONPATH=/app
 
 # تشغيل التطبيق
-CMD ["python", "app/main.py"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5001", "--reload"]

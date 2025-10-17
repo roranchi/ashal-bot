@@ -15,7 +15,7 @@ import logging
 import psycopg2
 from psycopg2.extras import DictCursor
 
-from app.database import get_connection
+from app.db.database import get_connection
 
 # إعداد التسجيل
 logging.basicConfig(level=logging.INFO)

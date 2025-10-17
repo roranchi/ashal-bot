@@ -1,71 +1,37 @@
-#!/usr/bin/env python3
-"""
-ASHAL Bot - الإصدار المحسن جاهز للإنتاج
-"""
+from fastapi import FastAPI, Depends, Request
+import os, logging
+from dotenv import load_dotenv
+from app.db.models.base import engine, Base
+from app.admin import startup_admin
+from fastapi_admin.app import FastAPIAdmin
 
-import sys
-import os
-sys.path.append("/opt/ashal-bot")
+# (اختياري) تأكد من أن هذه الاستيرادات موجودة إذا كنت تحتاج للـ API Routers الأساسية
+# from app.routes.api_routes import router as api_router
+# from app.routes.webhook import router as webhook_router
 
-import requests
-from flask import Flask, request, jsonify
-from app.database import get_connection
-import logging
-logging.basicConfig(level=logging.DEBUG)
+load_dotenv()
 
-app = Flask(__name__)
+app = FastAPI(title="Ashal Bot API - Core", version="2.0")
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-@app.route('/health', methods=['GET'])
+# --- دمج FastAPI Admin ---
+@app.on_event("startup")
+async def startup_event():
+    # Base.metadata.create_all(bind=engine) # استخدم هذا السطر فقط إذا كنت متأكداً من أن الجداول غير موجودة
+    await startup_admin()
+    app.mount("/admin", FastAPIAdmin(engine=engine), name="admin")
+    logger.info("✅ FastAPI Admin جاهز: /admin")
+
+# --- Endpoints الأساسية ---
+@app.get("/health")
 def health_check():
-    """فحص صحة التطبيق واتصال قاعدة البيانات"""
-    try:
-        conn = get_connection()
-        conn.close()
-        return jsonify({
-            "status": "healthy",
-            "database": "connected",
-            "timestamp": "2025-10-16 23:47:00"
-        }), 200
-    except Exception as e:
-        logging.error(f"Health check failed: {e}")
-        return jsonify({
-            "status": "unhealthy",
-            "database": "disconnected",
-            "error": str(e)
-        }), 500
+    return {"status": "ok", "message": "Ashal Bot FastAPI is running, Admin panel is active."}
 
-@app.route('/', methods=['GET'])
-def home():
-    """الصفحة الرئيسية"""
-    return jsonify({
-        "message": "مرحباً بك في Ashal Bot!",
-        "version": "2.0",
-        "status": "running"
-    }), 200
-
-@app.route('/send-message', methods=['POST'])
-def send_message():
-    """إرسال رسالة واتساب"""
-    try:
-        data = request.get_json()
-        phone = data.get('phone')
-        message = data.get('message')
-        
-        if not phone or not message:
-            return jsonify({"error": "رقم الهاتف والرسالة مطلوبان"}), 400
-        
-        # TODO: تنفيذ إرسال الرسالة عبر واتساب
-        logging.info(f"إرسال رسالة إلى {phone}: {message}")
-        
-        return jsonify({
-            "status": "success",
-            "message": "تم إرسال الرسالة بنجاح",
-            "phone": phone
-        }), 200
-        
-    except Exception as e:
-        logging.error(f"Error sending message: {e}")
-        return jsonify({"error": str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001, debug=False)
+# *****************************************************************
+# NOTE: إذا كان لديك Routers أساسية أخرى (مثل /webhook, /api/stats, /send-message)
+# يجب استيرادها وإضافتها هنا (باستخدام app.include_router)
+# مثال:
+# app.include_router(api_router, prefix="/api")
+# app.include_router(webhook_router, prefix="/webhook")
+# *****************************************************************

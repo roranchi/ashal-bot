@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from database import get_connection
+from app.db.database import get_connection
 
 class SmartReminder:
     @staticmethod

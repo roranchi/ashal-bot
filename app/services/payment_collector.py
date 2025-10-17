@@ -5,7 +5,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 
-from app.database import get_connection
+from app.db.database import get_connection
 
 class MockWhatsAppClient:
     def send_message(self, to, message):
