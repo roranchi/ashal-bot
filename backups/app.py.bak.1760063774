@@ -1,0 +1,43 @@
+from flask import Flask, request, jsonify
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from flask_admin import Admin, BaseView, expose
+from supabase import create_client
+from dotenv import load_dotenv
+import os
+import requests
+
+from services.message_processor import process_whatsapp_message
+from guardian.smart_project_guardian import SmartProjectGuardianPro
+import health_check  # تشغيل الفحص التلقائي عند التشغيل
+
+# تحميل المتغيرات البيئية
+load_dotenv()
+
+app = Flask(__name__)
+limiter = Limiter(get_remote_address, app=app)
+
+# التأكد من وجود متغيرات Supabase
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise Exception("SUPABASE_URL و SUPABASE_KEY يجب أن تكون موجودة في ملف .env")
+
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+guardian = SmartProjectGuardianPro(project_path="/opt/ashal-bot/", supabase=supabase)
+
+# مثال على headers لاستخدام Meta API
+headers = {
+    'Authorization': f"Bearer {os.getenv('META_ACCESS_TOKEN')}",
+    'Content-Type': 'application/json'
+}
+
+@app.route("/whatsapp", methods=["POST"])
+def whatsapp_webhook():
+    data = request.get_json()
+    response = process_whatsapp_message(data)
+    return jsonify({"status": "success", "response": response})
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)

@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  ashal-bot:
+    build: .
+    ports:
+      - "5001:5001"
+    environment:
+      - DATABASE_URL=postgresql://postgres:Pyfpuk-wozbyd-0taktu@aws-0-me-central-1.pooler.supabase.com:5432/postgres?sslmode=require
+    env_file:
+      - .env
+    restart: unless-stopped
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+networks:
+  default:
+    name: ashal-bot_ashal-network

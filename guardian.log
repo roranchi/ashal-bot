@@ -1,0 +1,107 @@
+2025-10-10 00:43:09,408 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-10-10 00:43:09,409 [INFO] [33mPress CTRL+C to quit[0m
+2025-10-10 00:43:09,410 [INFO]  * Restarting with stat
+2025-10-10 00:43:10,242 [WARNING]  * Debugger is active!
+2025-10-10 00:43:10,341 [INFO]  * Debugger PIN: 265-245-326
+2025-10-10 01:03:59,498 [INFO] 127.0.0.1 - - [10/Oct/2025 01:03:59] "[33mGET /ai-agent/health HTTP/1.1[0m" 404 -
+2025-10-10 01:05:45,129 [INFO]  * Detected change in '/opt/ashal-bot/app.py', reloading
+2025-10-10 01:05:45,292 [INFO]  * Restarting with stat
+2025-10-10 01:10:52,553 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-10-10 01:10:52,553 [INFO] [33mPress CTRL+C to quit[0m
+2025-10-10 01:10:52,554 [INFO]  * Restarting with stat
+2025-10-10 01:10:53,396 [WARNING]  * Debugger is active!
+2025-10-10 01:10:53,396 [INFO]  * Debugger PIN: 216-962-404
+2025-10-10 01:12:56,577 [INFO] 127.0.0.1 - - [10/Oct/2025 01:12:56] "[35m[1mGET /ai-agent/health HTTP/1.1[0m" 500 -
+2025-10-10 01:13:32,093 [INFO]  * Detected change in '/opt/ashal-bot/app.py', reloading
+2025-10-10 01:13:32,266 [INFO]  * Restarting with stat
+2025-10-10 01:13:33,085 [WARNING]  * Debugger is active!
+2025-10-10 01:13:33,086 [INFO]  * Debugger PIN: 216-962-404
+2025-10-10 01:14:12,269 [INFO]  * Detected change in '/opt/ashal-bot/app.py', reloading
+2025-10-10 01:14:12,447 [INFO]  * Restarting with stat
+2025-10-10 02:36:56,347 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://64.226.85.15:5000
+2025-10-10 02:36:56,348 [INFO] [33mPress CTRL+C to quit[0m
+2025-10-10 02:36:56,349 [INFO]  * Restarting with stat
+2025-10-10 02:36:57,174 [WARNING]  * Debugger is active!
+2025-10-10 02:36:57,175 [INFO]  * Debugger PIN: 380-058-016
+2025-10-10 02:43:47,907 [INFO]  * Detected change in '/opt/ashal-bot/health_check.py', reloading
+2025-10-10 02:43:48,099 [INFO]  * Restarting with stat
+2025-10-10 02:43:48,908 [WARNING]  * Debugger is active!
+2025-10-10 02:43:48,908 [INFO]  * Debugger PIN: 380-058-016
+2025-10-10 02:44:15,647 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://64.226.85.15:5000
+2025-10-10 02:44:15,648 [INFO] [33mPress CTRL+C to quit[0m
+2025-10-10 02:44:15,649 [INFO]  * Restarting with stat
+2025-10-10 02:44:16,379 [WARNING]  * Debugger is active!
+2025-10-10 02:44:16,380 [INFO]  * Debugger PIN: 404-594-259
+2025-10-10 02:46:53,267 [INFO] Found 2 Supabase migration files
+2025-10-10 02:46:53,385 [INFO] HTTP Request: GET https://udvmhyxihqmraknmwvei.supabase.co/rest/v1/information_schema.tables?select=table_name&table_schema=eq.public "HTTP/2 401 Unauthorized"
+2025-10-10 02:47:36,246 [INFO] Found 2 Supabase migration files
+2025-10-10 02:47:36,348 [INFO] HTTP Request: GET https://udvmhyxihqmraknmwvei.supabase.co/rest/v1/information_schema.tables?select=table_name&table_schema=eq.public "HTTP/2 401 Unauthorized"
+2025-10-10 02:48:15,172 [INFO] Found 2 Supabase migration files
+2025-10-10 02:48:56,587 [INFO] Found 2 Supabase migration files
+2025-10-10 02:50:23,549 [INFO] Found 2 Supabase migration files
+2025-10-10 02:51:13,136 [INFO] Found 2 Supabase migration files
+2025-10-10 02:51:46,968 [INFO] Found 2 Supabase migration files
+2025-10-10 03:07:02,164 [INFO]  * Detected change in '/opt/ashal-bot/guardian/smart_project_guardian.py', reloading
+2025-10-10 03:07:02,364 [INFO]  * Restarting with stat
+2025-10-10 03:07:03,230 [WARNING]  * Debugger is active!
+2025-10-10 03:07:03,231 [INFO]  * Debugger PIN: 404-594-259
+2025-10-10 03:10:21,106 [INFO] بدء التحليل الكامل...
+2025-10-10 03:10:21,112 [INFO] مسح المشروع اكتشف 32 ملفات بايثون، 2 تطبيقات Flask
+2025-10-10 03:10:21,114 [INFO] فحص البيئة: 0 مفقودة، 0 فارغة
+2025-10-10 03:10:21,114 [INFO] المهمة اليومية: إضافة اختبارات
+2025-10-10 03:16:14,580 [INFO]  * Detected change in '/opt/ashal-bot/guardian/smart_project_guardian.py', reloading
+2025-10-10 03:16:14,756 [INFO]  * Restarting with stat
+2025-10-10 03:16:15,638 [WARNING]  * Debugger is active!
+2025-10-10 03:16:15,638 [INFO]  * Debugger PIN: 404-594-259
+2025-10-10 03:16:22,510 [INFO] run_full_analysis started
+2025-10-10 03:16:22,523 [INFO] scan_project_structure: 73 files, 32 py files, 2999 LOC
+2025-10-10 03:16:22,529 [INFO] analyze_database_situation: conflicts=1
+2025-10-10 03:16:22,530 [INFO] check_env_variables: 1 missing, 0 empty
+2025-10-10 03:16:22,530 [INFO] identify_problems: problems=2 warnings=0
+2025-10-10 03:16:22,530 [INFO] set_focus_task: توحيد استخدام نوع واحد من قواعد البيانات
+2025-10-10 03:16:22,531 [INFO] Saved report JSON: /opt/ashal-bot/guardian_reports/guardian_report_20251010_031622.json
+2025-10-10 03:16:22,655 [INFO] HTTP Request: POST https://udvmhyxihqmraknmwvei.supabase.co/rest/v1/ai_agent_logs "HTTP/2 401 Unauthorized"
+2025-10-10 03:16:22,656 [WARNING] supabase logging failed: {'message': 'JSON could not be generated', 'code': 401, 'hint': 'Refer to full message for details', 'details': 'b\'{"message":"Invalid API key","hint":"Double check your Supabase `anon` or `service_role` API key."}\''}
+2025-10-10 05:03:26,204 [INFO] scan_project_structure: 75 files, 32 py files, 2999 LOC
+2025-10-10 05:03:26,205 [INFO] check_env_variables: 1 missing, 0 empty
+2025-10-10 14:43:30,901 [INFO] 🚀 بدء التحليل الكامل...
+2025-10-10 14:43:30,907 [INFO] 🔍 فحص المشروع: 33 ملفات بايثون
+2025-10-10 14:43:30,908 [INFO] 🌍 البيئة: 0 مفقودة، 0 فارغة
+2025-10-10 14:43:30,908 [INFO] 🎯 التركيز اليوم: إضافة توثيق للكود
+2025-10-10 14:43:30,909 [INFO] 📁 تم حفظ التقرير في /opt/ashal-bot/guardian_reports/guardian_report_20251010_144330.json
+2025-10-10 23:09:09,798 [INFO] 🔍 بدء فحص سريع...
+2025-10-10 23:09:31,431 [INFO] 🚀 بدء التحليل الكامل...
+2025-10-10 23:09:31,433 [INFO] فحص المشروع: 34 ملف بايثون
+2025-10-10 23:09:32,300 [INFO] المهمة اليومية: أضيفي DATABASE_URL=قيمة في ملف .env
+2025-10-10 23:09:32,301 [INFO] تم حفظ التقرير في /opt/ashal-bot/guardian_reports/guardian_report_20251010_230932.json
+2025-10-10 23:09:53,071 [INFO] تم إضافة مهمة: أضفت ACCESS_TOKEN
+2025-10-11 02:53:50,264 [INFO] 🛡️ بدء تشغيل Smart Project Guardian Ultra...
+2025-10-11 02:53:50,264 [INFO] بدء المسح الشامل للمشروع...
+2025-10-11 02:53:50,416 [INFO] هيكل المشروع: 2199 ملف بايثون
+2025-10-11 02:54:25,039 [INFO] بدء المسح الشامل للمشروع...
+2025-10-11 02:54:25,166 [INFO] هيكل المشروع: 2199 ملف بايثون
+2025-10-11 02:54:26,158 [ERROR] خطأ في إرسال التقرير إلى API: Cannot connect to host localhost:8000 ssl:default [None]
+2025-10-11 02:54:26,159 [INFO] تم إنشاء التقرير: /opt/ashal-bot/guardian_reports/scan_report_20251011_025426.json
+2025-10-11 02:54:26,159 [INFO] تم المسح الشامل: 433 مشكلة مكتشفة
+2025-10-11 02:54:42,192 [INFO] بدء المسح الشامل للمشروع...
+2025-10-11 02:54:42,343 [INFO] هيكل المشروع: 2199 ملف بايثون
+2025-10-11 02:54:43,415 [ERROR] خطأ في إرسال التقرير إلى API: Cannot connect to host localhost:8000 ssl:default [None]
+2025-10-11 02:54:43,415 [INFO] تم إنشاء التقرير: /opt/ashal-bot/guardian_reports/scan_report_20251011_025443.json
+2025-10-11 02:54:43,415 [INFO] تم المسح الشامل: 433 مشكلة مكتشفة
+2025-10-12 21:05:01,206 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://64.226.85.15:5000
+2025-10-12 21:05:01,207 [INFO] [33mPress CTRL+C to quit[0m
+2025-10-12 21:05:01,208 [INFO]  * Restarting with stat
+2025-10-12 21:05:02,837 [WARNING]  * Debugger is active!
+2025-10-12 21:05:02,839 [INFO]  * Debugger PIN: 840-159-539
+2025-10-12 21:26:29,815 [INFO]  * Detected change in '/opt/ashal-bot/app.py', reloading

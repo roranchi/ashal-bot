@@ -1,0 +1,133 @@
+{
+  "project_name": "Property Management WhatsApp Bot",
+  "timestamp": "2025-10-10T23:09:32.300612",
+  "stats": {
+    "total_files": 34,
+    "python_files": 34
+  },
+  "problems": [
+    {
+      "message": "المتغير DATABASE_URL مفقود في .env",
+      "solution": "أضيفي DATABASE_URL=قيمة في ملف .env"
+    },
+    {
+      "message": "المتغير WHATSAPP_PHONE_NUMBER_ID مفقود في .env",
+      "solution": "أضيفي WHATSAPP_PHONE_NUMBER_ID=قيمة في ملف .env"
+    },
+    {
+      "message": "مكتبة health_check مفقودة في app.py",
+      "solution": "ثبتي المكتبة بـ: pip install health_check"
+    },
+    {
+      "message": "مكتبة services مفقودة في app.py",
+      "solution": "ثبتي المكتبة بـ: pip install services"
+    },
+    {
+      "message": "مكتبة guardian مفقودة في app.py",
+      "solution": "ثبتي المكتبة بـ: pip install guardian"
+    },
+    {
+      "message": "مكتبة guardian مفقودة في health_check.py",
+      "solution": "ثبتي المكتبة بـ: pip install guardian"
+    },
+    {
+      "message": "مكتبة templates مفقودة في message_processor.py",
+      "solution": "ثبتي المكتبة بـ: pip install templates"
+    },
+    {
+      "message": "مكتبة os, مفقودة في smart_project_guardian_backup_20251010_230748.py",
+      "solution": "ثبتي المكتبة بـ: pip install os,"
+    },
+    {
+      "message": "مكتبة app مفقودة في main.py",
+      "solution": "ثبتي المكتبة بـ: pip install app"
+    },
+    {
+      "message": "مكتبة app مفقودة في contracts_manager.py",
+      "solution": "ثبتي المكتبة بـ: pip install app"
+    },
+    {
+      "message": "مكتبة app مفقودة في payment_collector.py",
+      "solution": "ثبتي المكتبة بـ: pip install app"
+    },
+    {
+      "message": "مكتبة app مفقودة في maintenance_service.py",
+      "solution": "ثبتي المكتبة بـ: pip install app"
+    },
+    {
+      "message": "مكتبة database مفقودة في reminder_service_fixed.py",
+      "solution": "ثبتي المكتبة بـ: pip install database"
+    },
+    {
+      "message": "مكتبة database مفقودة في reminder_service.py",
+      "solution": "ثبتي المكتبة بـ: pip install database"
+    },
+    {
+      "message": "مكتبة app مفقودة في contract_handler.py",
+      "solution": "ثبتي المكتبة بـ: pip install app"
+    },
+    {
+      "message": "مكتبة services مفقودة في contract_handler.py",
+      "solution": "ثبتي المكتبة بـ: pip install services"
+    },
+    {
+      "message": "مكتبة whatsapp مفقودة في contract_handler.py",
+      "solution": "ثبتي المكتبة بـ: pip install whatsapp"
+    },
+    {
+      "message": "مكتبة app مفقودة في maintenance_handler.py",
+      "solution": "ثبتي المكتبة بـ: pip install app"
+    },
+    {
+      "message": "مكتبة services مفقودة في maintenance_handler.py",
+      "solution": "ثبتي المكتبة بـ: pip install services"
+    },
+    {
+      "message": "مكتبة whatsapp مفقودة في maintenance_handler.py",
+      "solution": "ثبتي المكتبة بـ: pip install whatsapp"
+    },
+    {
+      "message": "مكتبة database مفقودة في contract_handler_fixed.py",
+      "solution": "ثبتي المكتبة بـ: pip install database"
+    },
+    {
+      "message": "مكتبة services مفقودة في contract_handler_fixed.py",
+      "solution": "ثبتي المكتبة بـ: pip install services"
+    },
+    {
+      "message": "مكتبة templates مفقودة في contract_handler_fixed.py",
+      "solution": "ثبتي المكتبة بـ: pip install templates"
+    },
+    {
+      "message": "مكتبة app مفقودة في payment_handler.py",
+      "solution": "ثبتي المكتبة بـ: pip install app"
+    },
+    {
+      "message": "مكتبة core مفقودة في api_routes.py",
+      "solution": "ثبتي المكتبة بـ: pip install core"
+    },
+    {
+      "message": "مكتبة app مفقودة في webhook.py",
+      "solution": "ثبتي المكتبة بـ: pip install app"
+    },
+    {
+      "message": "مكتبة app مفقودة في webhook.py",
+      "solution": "ثبتي المكتبة بـ: pip install app"
+    },
+    {
+      "message": "مكتبة app مفقودة في webhook.py",
+      "solution": "ثبتي المكتبة بـ: pip install app"
+    },
+    {
+      "message": "مكتبة database مفقودة في sample_contracts.py",
+      "solution": "ثبتي المكتبة بـ: pip install database"
+    }
+  ],
+  "warnings": [
+    {
+      "message": "لم يتم تهيئة اتصال Supabase",
+      "solution": "تأكدي من تمرير عميل Supabase أو إعداد SUPABASE_URL و SUPABASE_KEY في .env"
+    }
+  ],
+  "focus_task": "أضيفي DATABASE_URL=قيمة في ملف .env"
+}

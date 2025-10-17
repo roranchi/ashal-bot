@@ -1,0 +1,13 @@
+{
+  "project_name": "Property Management WhatsApp Bot",
+  "version": "2.0.0-Ultra",
+  "setup_date": "2025-10-10T03:07:03.219312",
+  "scan_interval": 300,
+  "max_issues_per_scan": 50,
+  "notification_enabled": true,
+  "telegram_bot_token": "",
+  "telegram_chat_id": "",
+  "webhook_url": "",
+  "api_endpoint": "http://localhost:8000/v1",
+  "default_energy": "متوسط"
+}

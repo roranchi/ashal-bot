@@ -1,0 +1,97 @@
+from flask import Flask, request, jsonify
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from supabase import create_client, Client
+import os
+import requests
+from services.message_processor import process_whatsapp_message
+from flask_admin import Admin, BaseView, expose
+from guardian.smart_project_guardian import SmartProjectGuardianPro
+
+app = Flask(__name__)
+limiter = Limiter(get_remote_address, app=app)
+supabase = create_client(os.getenv('SUPABASE_URL'), os.getenv('SUPABASE_KEY'))
+guardian = SmartProjectGuardianPro(project_path='/opt/ashal-bot/', supabase=supabase)
+admin = Admin(app, name='Ashal Admin', template_mode='bootstrap5')
+
+class AIAgentView(BaseView):
+    @expose('/')
+    def index(self):
+        logs = supabase.from('ai_agent_logs').select('*').order('timestamp', desc=True).limit(50).execute().data
+        return self.render('ai_agent.html', logs=logs)
+
+admin.add_view(AIAgentView(name='AI Agent Logs', endpoint='ai_agent'))
+
+@app.route('/whatsapp/webhook', methods=['GET', 'POST'])
+@limiter.limit("10/minute")
+def whatsapp_webhook():
+    if request.method == 'GET':
+        if request.args.get('hub.verify_token') == os.getenv('META_VERIFY_TOKEN'):
+            return request.args.get('hub.challenge'), 200
+        return 'Invalid', 403
+    data = request.json
+    if data.get('object') == 'whatsapp_business_account':
+        for entry in data['entry']:
+            for change in entry['changes']:
+                if change['field'] == 'messages':
+                    msg = change['value']['messages'][0]
+                    if msg['type'] == 'text':
+                        result = process_whatsapp_message(supabase, msg['text']['body'], msg['from'])
+                        if result:
+                            send_whatsapp_message(msg['from'], result['response'], result.get('language', 'en'))
+    return '', 200
+
+def send_whatsapp_message(to: str, body: str, lang: str = 'en'):
+    url = f"https://graph.facebook.com/v23.0/{os.getenv('META_PHONE_ID')}/messages"
+    headers = {'Authorization': f'Bearer {os.getenv('META_ACCESS_TOKEN')}', 'Content-Type': 'application/json'}
+    payload = {
+        'messaging_product': 'whatsapp',
+        'recipient_type': 'individual',
+        'to': to,
+        'type': 'text',
+        'text': {'preview_url': False, 'body': body}
+    }
+    response = requests.post(url, json=payload, headers=headers)
+    if response.status_code != 200:
+        supabase.from('ai_agent_logs').insert({
+            'event_type': 'error_detected',
+            'details': {'error': response.text},
+            'severity': 'high'
+        }).execute()
+    return response.json()
+
+@app.route('/guardian/report', methods=['GET'])
+def guardian_report():
+    guardian.run_full_analysis()
+    return jsonify({'message': 'Guardian report generated'})
+
+@app.route('/ai-agent/report', methods=['GET'])
+def ai_agent_report():
+    logs = supabase.from('ai_agent_logs').select('*').order('timestamp', desc=True).limit(50).execute().data
+    return jsonify(logs)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+# إضافة واجهات API للتحليلات
+@app.route('/analytics/occupancy/<int:owner_id>', methods=['GET'])
+def get_occupancy_rate(owner_id):
+    from services.analytics_manager import generate_aggregated_metrics
+    metrics = generate_aggregated_metrics(supabase, owner_id)
+    return jsonify(metrics)
+
+@app.route('/analytics/insights/<int:user_id>', methods=['GET'])
+def get_user_insights(user_id):
+    from services.analytics_manager import generate_user_insights
+    insights = generate_user_insights(supabase, user_id)
+    return jsonify(insights)
+
+@app.route('/analytics/sql/occupancy/<int:owner_id>', methods=['GET'])
+def get_sql_occupancy(owner_id):
+    result = supabase.rpc('calculate_occupancy_rate', {'owner_id_param': owner_id}).execute()
+    return jsonify({'occupancy_rate': result.data})
+
+@app.route('/analytics/sql/churn-risk/<int:tenant_id>', methods=['GET'])
+def get_churn_risk(tenant_id):
+    result = supabase.rpc('calculate_churn_risk', {'tenant_id_param': tenant_id}).execute()
+    return jsonify({'churn_risk': result.data})

@@ -1,0 +1,68 @@
+{
+  "timestamp": "2025-10-10T14:43:30.908949",
+  "project": "Property Management WhatsApp Bot",
+  "energy": "متوسط",
+  "focus": "إضافة توثيق للكود",
+  "structure": {
+    "python_files": [
+      "app.py",
+      "health_check.py",
+      "app_simple.py",
+      "services/analytics_manager.py",
+      "services/message_processor.py",
+      "guardian/smart_project_guardian.py",
+      "guardian/smart_project_guardian_backup_20251010_144319.py",
+      "app/main.py",
+      "app/database.py",
+      "app/contracts_manager.py",
+      "app/services/payment_collector.py",
+      "app/services/maintenance_service.py",
+      "app/services/daily_reminders.py",
+      "app/services/__init__.py",
+      "app/services/reminder_service_fixed.py",
+      "app/services/message_processor.py",
+      "app/services/property_service.py",
+      "app/services/reminder_service.py",
+      "app/services/whatsapp_api.py",
+      "app/handlers/contract_handler.py",
+      "app/handlers/maintenance_handler.py",
+      "app/handlers/__init__.py",
+      "app/handlers/contract_handler_fixed.py",
+      "app/handlers/payment_handler.py",
+      "app/utils/__init__.py",
+      "app/routes/api_routes.py",
+      "app/routes/webhook.py",
+      "app/templates/__init__.py",
+      "app/templates/contract_reminders.py",
+      "analysis_only/sample_guardian.py",
+      "analysis_only/sample_contracts.py",
+      "templates/maintenance_templates.py",
+      "templates/payment_templates.py"
+    ],
+    "flask_apps": [
+      "app.py",
+      "app_simple.py",
+      "guardian/smart_project_guardian.py",
+      "guardian/smart_project_guardian_backup_20251010_144319.py",
+      "app/main.py",
+      "app/routes/api_routes.py",
+      "app/routes/webhook.py",
+      "analysis_only/sample_guardian.py"
+    ],
+    "configs": [
+      "requirements.txt",
+      ".env"
+    ],
+    "whatsapp": []
+  },
+  "env": {
+    "missing": [],
+    "empty": []
+  },
+  "database": {
+    "tables": []
+  },
+  "problems": [],
+  "warnings": [],
+  "completed": []
+}

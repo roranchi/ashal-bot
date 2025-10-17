@@ -1,0 +1,123 @@
+{
+  "generated_at": "2025-10-10T03:16:22.531009",
+  "project_name": "Property Management WhatsApp Bot",
+  "energy_level": "متوسط",
+  "focus_today": "توحيد استخدام نوع واحد من قواعد البيانات",
+  "project_stats": {
+    "total_files": 73,
+    "python_files": 32,
+    "lines_of_code": 2999,
+    "last_modified": "2025-10-10T03:16:22.509086"
+  },
+  "structure": {
+    "python_files": [
+      "app.py",
+      "health_check.py",
+      "app_simple.py",
+      "services/analytics_manager.py",
+      "services/message_processor.py",
+      "guardian/smart_project_guardian.py",
+      "app/main.py",
+      "app/database.py",
+      "app/contracts_manager.py",
+      "app/services/payment_collector.py",
+      "app/services/maintenance_service.py",
+      "app/services/daily_reminders.py",
+      "app/services/__init__.py",
+      "app/services/reminder_service_fixed.py",
+      "app/services/message_processor.py",
+      "app/services/property_service.py",
+      "app/services/reminder_service.py",
+      "app/services/whatsapp_api.py",
+      "app/handlers/contract_handler.py",
+      "app/handlers/maintenance_handler.py",
+      "app/handlers/__init__.py",
+      "app/handlers/contract_handler_fixed.py",
+      "app/handlers/payment_handler.py",
+      "app/utils/__init__.py",
+      "app/routes/api_routes.py",
+      "app/routes/webhook.py",
+      "app/templates/__init__.py",
+      "app/templates/contract_reminders.py",
+      "analysis_only/sample_guardian.py",
+      "analysis_only/sample_contracts.py",
+      "templates/maintenance_templates.py",
+      "templates/payment_templates.py"
+    ],
+    "flask_apps": [
+      "app.py",
+      "app/main.py"
+    ],
+    "whatsapp": [
+      "app/services/whatsapp_api.py",
+      "app/routes/webhook.py"
+    ],
+    "configs": [
+      "requirements.txt",
+      ".env"
+    ],
+    "scripts": [
+      "get-docker.sh",
+      "scripts/deploy.sh",
+      "scripts/setup-server.sh"
+    ],
+    "templates": [
+      "templates/ai_agent.html"
+    ]
+  },
+  "database_analysis": {
+    "sqlite_files": [],
+    "postgres_usage": [
+      "guardian/smart_project_guardian.py",
+      "app/database.py",
+      "app/contracts_manager.py",
+      "app/services/reminder_service_fixed.py",
+      "analysis_only/sample_guardian.py",
+      "analysis_only/sample_contracts.py"
+    ],
+    "supabase_usage": [
+      "app.py",
+      "health_check.py",
+      "app_simple.py",
+      "services/analytics_manager.py",
+      "services/message_processor.py",
+      "guardian/smart_project_guardian.py",
+      "app/database.py",
+      "analysis_only/sample_guardian.py"
+    ],
+    "mysql_usage": [
+      "guardian/smart_project_guardian.py",
+      "analysis_only/sample_guardian.py"
+    ],
+    "db_conflicts": [
+      "تناقض: Supabase مع PostgreSQL مباشر"
+    ]
+  },
+  "env_status": {
+    "file_exists": true,
+    "missing": [
+      "PORT"
+    ],
+    "empty": [],
+    "insecure": []
+  },
+  "problems": [
+    {
+      "type": "critical",
+      "message": "تناقض: Supabase مع PostgreSQL مباشر",
+      "solution": "توحيد استخدام نوع واحد من قواعد البيانات",
+      "priority": 1,
+      "category": "database"
+    },
+    {
+      "type": "high",
+      "message": "المتغير PORT مفقود في .env",
+      "solution": "أضف PORT=value",
+      "priority": 2,
+      "category": "environment"
+    }
+  ],
+  "warnings": [],
+  "suggestions": [],
+  "completed_tasks": []
+}
