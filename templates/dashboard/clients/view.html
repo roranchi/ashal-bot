@@ -1,0 +1,104 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}تفاصيل العميل - أصل{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-6">
+    
+    <!-- Page Header -->
+    <div class="flex items-center gap-4">
+        <a href="/dashboard/clients" class="text-gray-600 hover:text-gray-800 transition">
+            <i class="fas fa-arrow-right text-2xl"></i>
+        </a>
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">
+                <i class="fas fa-user text-blue-600 ml-2"></i>
+                {{ client[1] }}
+            </h1>
+            <p class="text-gray-500 mt-1">تفاصيل العميل وإدارة العقارات المرتبطة</p>
+        </div>
+    </div>
+    
+    <!-- Client Details Card -->
+    <div class="bg-white rounded-xl shadow-lg p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <p class="text-gray-500 font-semibold"><i class="fas fa-user ml-2"></i> الاسم</p>
+                <p class="text-gray-800 font-bold text-lg">{{ client[1] }}</p>
+            </div>
+            <div>
+                <p class="text-gray-500 font-semibold"><i class="fas fa-envelope ml-2"></i> البريد الإلكتروني</p>
+                <p class="text-gray-800">{{ client[2] or '-' }}</p>
+            </div>
+            <div>
+                <p class="text-gray-500 font-semibold"><i class="fas fa-phone ml-2"></i> رقم الجوال</p>
+                <p class="text-gray-800" dir="ltr">{{ client[3] }}</p>
+            </div>
+            <div>
+                <p class="text-gray-500 font-semibold"><i class="fas fa-map-marker-alt ml-2"></i> العنوان</p>
+                <p class="text-gray-800">{{ client[4] or '-' }}</p>
+            </div>
+            <div class="col-span-2">
+                <p class="text-gray-500 font-semibold"><i class="fas fa-sticky-note ml-2"></i> ملاحظات</p>
+                <p class="text-gray-800">{{ client[5] or '-' }}</p>
+            </div>
+            <div>
+                <p class="text-gray-500 font-semibold"><i class="fas fa-calendar ml-2"></i> تاريخ التسجيل</p>
+                <p class="text-gray-800">{{ client[6][:10] }}</p>
+            </div>
+            <div>
+                <p class="text-gray-500 font-semibold"><i class="fas fa-calendar-check ml-2"></i> آخر تحديث</p>
+                <p class="text-gray-800">{{ client[7][:10] }}</p>
+            </div>
+        </div>
+        
+        <div class="flex gap-4 mt-6">
+            <a href="/dashboard/clients/{{ client[0] }}/edit" class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition shadow-lg flex items-center gap-2">
+                <i class="fas fa-edit"></i>
+                تعديل العميل
+            </a>
+            <form action="/dashboard/clients/{{ client[0] }}/delete" method="POST" onsubmit="return confirm('هل أنت متأكد من حذف هذا العميل؟')">
+                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg transition shadow-lg flex items-center gap-2">
+                    <i class="fas fa-trash"></i>
+                    حذف العميل
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Properties Section -->
+    <div class="bg-white rounded-xl shadow-lg p-8">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">
+            <i class="fas fa-building text-blue-600 ml-2"></i>
+            العقارات المرتبطة
+        </h3>
+        {% if properties %}
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-gray-50 border-b">
+                    <tr>
+                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">الاسم</th>
+                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">العنوان</th>
+                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">النوع</th>
+                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">الحالة</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% for property in properties %}
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-6 py-4 text-gray-900">{{ property[1] }}</td>
+                        <td class="px-6 py-4 text-gray-600">{{ property[2] }}</td>
+                        <td class="px-6 py-4 text-gray-600">{{ property[3] }}</td>
+                        <td class="px-6 py-4 text-gray-600">{{ property[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-gray-500 text-center py-4">لا توجد عقارات مرتبطة بعد</p>
+        {% endif %}
+    </div>
+    
+</div>
+{% endblock %}

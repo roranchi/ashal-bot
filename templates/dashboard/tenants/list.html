@@ -1,0 +1,91 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}إدارة المستأجرين - أسهل{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-3xl font-bold text-white">
+                <i class="fas fa-users text-purple-400 ml-2"></i>
+                إدارة المستأجرين
+            </h1>
+            <p class="text-gray-400 mt-1">إدارة جميع المستأجرين والعقود</p>
+        </div>
+        <a href="/dashboard/tenants/add" class="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 py-3 rounded-xl shadow-lg transition glow-purple">
+            <i class="fas fa-plus ml-2"></i>
+            إضافة مستأجر جديد
+        </a>
+    </div>
+    
+    {% if error %}
+    <div class="glass-dark border-r-4 border-red-500 text-red-400 p-4 rounded-xl">
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+    
+    <div class="glass-dark rounded-xl overflow-hidden">
+        <table class="w-full">
+            <thead class="bg-purple-900/30 border-b border-purple-500/30">
+                <tr>
+                    <th class="px-6 py-4 text-right text-sm font-semibold text-purple-300">#</th>
+                    <th class="px-6 py-4 text-right text-sm font-semibold text-purple-300">الاسم</th>
+                    <th class="px-6 py-4 text-right text-sm font-semibold text-purple-300">رقم الجوال</th>
+                    <th class="px-6 py-4 text-right text-sm font-semibold text-purple-300">البريد الإلكتروني</th>
+                    <th class="px-6 py-4 text-right text-sm font-semibold text-purple-300">الهوية الوطنية</th>
+                    <th class="px-6 py-4 text-center text-sm font-semibold text-purple-300">العقود</th>
+                    <th class="px-6 py-4 text-center text-sm font-semibold text-purple-300">الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-purple-500/10">
+                {% if tenants %}
+                    {% for tenant in tenants %}
+                    <tr class="hover:bg-purple-600/10 transition">
+                        <td class="px-6 py-4 text-gray-300">{{ tenant[0] }}</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-purple-800 rounded-full flex items-center justify-center text-white font-bold">
+                                    {{ tenant[1][0] if tenant[1] else 'م' }}
+                                </div>
+                                <span class="font-semibold text-white">{{ tenant[1] }}</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-gray-300" dir="ltr">{{ tenant[2] }}</td>
+                        <td class="px-6 py-4 text-gray-300">{{ tenant[3] or '-' }}</td>
+                        <td class="px-6 py-4 text-gray-300">{{ tenant[4] or '-' }}</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="bg-purple-600/30 text-purple-300 px-3 py-1 rounded-full text-sm font-semibold">
+                                {{ tenant[5] }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center justify-center gap-2">
+                                <a href="/dashboard/tenants/{{ tenant[0] }}" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition text-sm">
+                                    <i class="fas fa-eye ml-1"></i>
+                                    عرض
+                                </a>
+                                <form action="/dashboard/tenants/{{ tenant[0] }}/delete" method="POST" onsubmit="return confirm('هل أنت متأكد؟')">
+                                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition text-sm">
+                                        <i class="fas fa-trash ml-1"></i>
+                                        حذف
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="px-6 py-12 text-center text-gray-400">
+                            <i class="fas fa-inbox text-6xl text-purple-600/30 mb-4"></i>
+                            <p class="text-lg">لا يوجد مستأجرين حتى الآن</p>
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+{% endblock %}

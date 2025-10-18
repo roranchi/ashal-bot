@@ -1,0 +1,93 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}إدارة العملاء - أصل{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    
+    <!-- Page Header -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">
+                <i class="fas fa-briefcase text-blue-600 ml-2"></i>
+                إدارة العملاء
+            </h1>
+            <p class="text-gray-500 mt-1">إدارة مالكي العقارات والشركات</p>
+        </div>
+        <a href="/dashboard/clients/add" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg transition flex items-center gap-2">
+            <i class="fas fa-plus"></i>
+            <span>إضافة عميل جديد</span>
+        </a>
+    </div>
+    
+    {% if error %}
+    <div class="bg-yellow-100 border-r-4 border-yellow-500 text-yellow-700 p-4 rounded-lg">
+        <p class="font-bold">تنبيه</p>
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+    
+    <!-- Clients Table -->
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-gray-50 border-b">
+                    <tr>
+                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">#</th>
+                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">الاسم</th>
+                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">البريد الإلكتروني</th>
+                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">رقم الجوال</th>
+                        <th class="px-6 py-4 text-right text-sm font-semibold text-gray-700">تاريخ التسجيل</th>
+                        <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700">الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% if clients %}
+                        {% for client in clients %}
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 text-gray-900">{{ client[0] }}</td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        {{ client[1][0] if client[1] else 'ع' }}
+                                    </div>
+                                    <span class="font-semibold text-gray-900">{{ client[1] }}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-gray-600">{{ client[2] or '-' }}</td>
+                            <td class="px-6 py-4 text-gray-600" dir="ltr">{{ client[3] }}</td>
+                            <td class="px-6 py-4 text-gray-600">{{ client[4][:10] if client[4] else '-' }}</td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center justify-center gap-2">
+                                    <a href="/dashboard/clients/{{ client[0] }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition text-sm">
+                                        <i class="fas fa-eye ml-1"></i>
+                                        عرض
+                                    </a>
+                                    <form action="/dashboard/clients/{{ client[0] }}/delete" method="POST" onsubmit="return confirm('هل أنت متأكد من حذف هذا العميل؟')">
+                                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition text-sm">
+                                            <i class="fas fa-trash ml-1"></i>
+                                            حذف
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="px-6 py-12 text-center text-gray-500">
+                                <i class="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
+                                <p class="text-lg">لا توجد عملاء حتى الآن</p>
+                                <a href="/dashboard/clients/add" class="text-blue-600 hover:text-blue-700 mt-2 inline-block">
+                                    أضف أول عميل الآن
+                                </a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

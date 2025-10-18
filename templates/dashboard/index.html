@@ -1,0 +1,48 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}لوحة التحكم - أصل{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto space-y-6">
+    
+    <!-- Page Header -->
+    <div class="bg-white rounded-xl shadow-lg p-8">
+        <h1 class="text-3xl font-bold text-gray-800">
+            <i class="fas fa-tachometer-alt text-blue-600 ml-2"></i>
+            مرحباً، {{ username }}!
+        </h1>
+        <p class="text-gray-500 mt-2">لوحة تحكم أصل لإدارة العملاء والعقارات</p>
+    </div>
+    
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+            <h3 class="text-xl font-semibold text-gray-700">
+                <i class="fas fa-users text-blue-600 ml-2"></i>
+                إجمالي العملاء
+            </h3>
+            <p class="text-4xl font-bold text-gray-800 mt-2">{{ total_clients }}</p>
+            <a href="/dashboard/clients" class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition">
+                إدارة العملاء
+            </a>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+            <h3 class="text-xl font-semibold text-gray-700">
+                <i class="fas fa-building text-blue-600 ml-2"></i>
+                إجمالي العقارات
+            </h3>
+            <p class="text-4xl font-bold text-gray-800 mt-2">{{ total_properties }}</p>
+            <a href="/dashboard/properties" class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition">
+                إدارة العقارات
+            </a>
+        </div>
+    </div>
+    
+    {% if error %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
+        <p><i class="fas fa-exclamation-circle ml-2"></i> خطأ: {{ error }}</p>
+    </div>
+    {% endif %}
+    
+</div>
+{% endblock %}

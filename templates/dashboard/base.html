@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" x-data="{ lang: 'ar', sidebarOpen: true }" :class="lang === 'ar' ? 'rtl' : 'ltr'">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}لوحة تحكم أسهل{% endblock %}</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0a0a0f',
+                            800: '#12121a',
+                            700: '#1a1a27',
+                            600: '#252537',
+                        },
+                        purple: {
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a27 100%);
+        }
+        .font-tech { font-family: 'Orbitron', sans-serif; }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        
+        /* Glow Effects */
+        .glow-purple {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+        
+        .glow-gold {
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float { animation: float 3s ease-in-out infinite; }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1a27; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-100 min-h-screen">
+    
+    <!-- Sidebar -->
+    <aside :class="sidebarOpen ? 'translate-x-0' : (lang === 'ar' ? 'translate-x-full' : '-translate-x-full')" 
+           class="fixed top-0 h-screen w-72 glass-dark transition-transform duration-300 z-50 shadow-2xl"
+           :style="lang === 'ar' ? 'right: 0' : 'left: 0'">
+        
+        <div class="p-6 border-b border-purple-500/30">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl flex items-center justify-center glow-purple">
+                    <i class="fas fa-rocket text-2xl text-white"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold font-tech bg-gradient-to-r from-purple-400 to-gold-400 bg-clip-text text-transparent">
+                        <span x-show="lang === 'ar'">أسهل</span>
+                        <span x-show="lang === 'en'" x-cloak>Ashal</span>
+                    </h2>
+                    <p class="text-xs text-purple-300">
+                        <span x-show="lang === 'ar'">نظام إدارة العقارات</span>
+                        <span x-show="lang === 'en'" x-cloak>Property Management</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="mt-6 px-4 space-y-2">
+            <a href="/dashboard/" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-purple-600/20 transition group">
+                <i class="fas fa-chart-line text-purple-400 group-hover:scale-110 transition"></i>
+                <span class="group-hover:translate-x-1 transition">
+                    <span x-show="lang === 'ar'">لوحة التحكم</span>
+                    <span x-show="lang === 'en'" x-cloak>Dashboard</span>
+                </span>
+            </a>
+            
+            <a href="/dashboard/clients" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-purple-600/20 transition group">
+                <i class="fas fa-briefcase text-purple-400 group-hover:scale-110 transition"></i>
+                <span class="group-hover:translate-x-1 transition">
+                    <span x-show="lang === 'ar'">العملاء</span>
+                    <span x-show="lang === 'en'" x-cloak>Clients</span>
+                </span>
+            </a>
+            
+            <a href="/dashboard/properties" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-purple-600/20 transition group">
+                <i class="fas fa-building text-purple-400 group-hover:scale-110 transition"></i>
+                <span class="group-hover:translate-x-1 transition">
+                    <span x-show="lang === 'ar'">العقارات</span>
+                    <span x-show="lang === 'en'" x-cloak>Properties</span>
+                </span>
+            </a>
+            
+            <a href="/dashboard/tenants" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-purple-600/20 transition group">
+                <i class="fas fa-users text-purple-400 group-hover:scale-110 transition"></i>
+                <span class="group-hover:translate-x-1 transition">
+                    <span x-show="lang === 'ar'">المستأجرين</span>
+                    <span x-show="lang === 'en'" x-cloak>Tenants</span>
+                </span>
+            </a>
+            
+            <a href="/dashboard/contracts" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-purple-600/20 transition group">
+                <i class="fas fa-file-contract text-purple-400 group-hover:scale-110 transition"></i>
+                <span class="group-hover:translate-x-1 transition">
+                    <span x-show="lang === 'ar'">العقود</span>
+                    <span x-show="lang === 'en'" x-cloak>Contracts</span>
+                </span>
+            </a>
+            
+            <a href="/dashboard/payments" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-purple-600/20 transition group">
+                <i class="fas fa-dollar-sign text-gold-400 group-hover:scale-110 transition"></i>
+                <span class="group-hover:translate-x-1 transition">
+                    <span x-show="lang === 'ar'">المدفوعات</span>
+                    <span x-show="lang === 'en'" x-cloak>Payments</span>
+                </span>
+            </a>
+            
+            <a href="/dashboard/messages" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-purple-600/20 transition group">
+                <i class="fab fa-whatsapp text-green-400 group-hover:scale-110 transition"></i>
+                <span class="group-hover:translate-x-1 transition">
+                    <span x-show="lang === 'ar'">رسائل واتساب</span>
+                    <span x-show="lang === 'en'" x-cloak>WhatsApp</span>
+                </span>
+            </a>
+            
+            <a href="/dashboard/reports" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-purple-600/20 transition group">
+                <i class="fas fa-chart-bar text-purple-400 group-hover:scale-110 transition"></i>
+                <span class="group-hover:translate-x-1 transition">
+                    <span x-show="lang === 'ar'">التقارير</span>
+                    <span x-show="lang === 'en'" x-cloak>Reports</span>
+                </span>
+            </a>
+            
+            <a href="/dashboard/settings" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-purple-600/20 transition group">
+                <i class="fas fa-cog text-purple-400 group-hover:scale-110 transition"></i>
+                <span class="group-hover:translate-x-1 transition">
+                    <span x-show="lang === 'ar'">الإعدادات</span>
+                    <span x-show="lang === 'en'" x-cloak>Settings</span>
+                </span>
+            </a>
+        </nav>
+        
+        <div class="absolute bottom-6 left-6 right-6">
+            <button class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 py-3 px-4 rounded-xl transition glow-gold font-semibold">
+                <i class="fas fa-sign-out-alt mr-2"></i>
+                <span x-show="lang === 'ar'">تسجيل الخروج</span>
+                <span x-show="lang === 'en'" x-cloak>Logout</span>
+            </button>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <div :class="sidebarOpen ? (lang === 'ar' ? 'mr-72' : 'ml-72') : 'mr-0 ml-0'" class="transition-all duration-300">
+        
+        <!-- Top Bar -->
+        <header class="glass-dark sticky top-0 z-40 p-4 backdrop-blur-xl border-b border-purple-500/20">
+            <div class="flex items-center justify-between">
+                <button @click="sidebarOpen = !sidebarOpen" class="text-2xl text-purple-400 hover:text-purple-300 transition hover:scale-110">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="flex items-center gap-4">
+                    <!-- Language Toggle -->
+                    <button @click="lang = lang === 'ar' ? 'en' : 'ar'; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'" 
+                            class="glass px-4 py-2 rounded-lg hover:bg-purple-600/20 transition flex items-center gap-2">
+                        <i class="fas fa-language text-purple-400"></i>
+                        <span x-show="lang === 'ar'" class="text-sm">EN</span>
+                        <span x-show="lang === 'en'" x-cloak class="text-sm">عربي</span>
+                    </button>
+                    
+                    <div class="flex items-center gap-3">
+                        <div class="text-right">
+                            <p class="text-xs text-gray-400">
+                                <span x-show="lang === 'ar'">مرحباً،</span>
+                                <span x-show="lang === 'en'" x-cloak>Welcome,</span>
+                            </p>
+                            <p class="font-bold bg-gradient-to-r from-purple-400 to-gold-400 bg-clip-text text-transparent">
+                                <span x-show="lang === 'ar'">المدير</span>
+                                <span x-show="lang === 'en'" x-cloak>Admin</span>
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-gold-500 rounded-full flex items-center justify-center text-white font-bold text-xl glow-purple float">
+                            A
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Page Content -->
+        <main class="p-6">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    
+    <!-- Floating Particles (Optional) -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl"></div>
+    </div>
+    
+</body>
+</html>

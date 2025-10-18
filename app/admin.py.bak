@@ -1,0 +1,28 @@
+from fastapi_admin.app import FastAPIAdmin
+from fastapi_admin.resources import Link
+from fastapi import FastAPI
+# *** تغيير مهم: نستخدم redis.asyncio الحديثة بدلاً من aioredis
+import redis.asyncio as redis 
+
+class Admin(FastAPIAdmin):
+    async def configure(self, app: FastAPI):
+        # تأكد من أن اسم خدمة Redis في Docker هو 'redis' (عادة ما يكون كذلك)
+        redis_client = redis.from_url("redis://redis:6379", encoding="utf-8", decode_responses=True)
+        self.redis = redis_client
+        await super().configure(app)
+        
+        # إضافة موارد الداشبورد
+        self.add_resource(Link(label="الرئيسية" if self.lang == "ar" else "Home", url="/", icon="fas fa-home"))
+        self.add_resource(Link(label="العملاء" if self.lang == "ar" else "Clients", url="/dashboard/clients", icon="fas fa-briefcase"))
+        self.add_resource(Link(label="العقارات" if self.lang == "ar" else "Properties", url="/dashboard/properties", icon="fas fa-building"))
+        self.add_resource(Link(label="المستأجرين" if self.lang == "ar" else "Tenants", url="/dashboard/tenants", icon="fas fa-users"))
+        self.add_resource(Link(label="العقود" if self.lang == "ar" else "Contracts", url="/dashboard/contracts", icon="fas fa-file-contract"))
+        self.add_resource(Link(label="المدفوعات" if self.lang == "ar" else "Payments", url="/dashboard/payments", icon="fas fa-dollar-sign"))
+        self.add_resource(Link(label="رسائل واتساب" if self.lang == "ar" else "WhatsApp Messages", url="/dashboard/messages", icon="fab fa-whatsapp"))
+        self.add_resource(Link(label="التقارير" if self.lang == "ar" else "Reports", url="/dashboard/reports", icon="fas fa-chart-bar"))
+        self.add_resource(Link(label="الإعدادات" if self.lang == "ar" else "Settings", url="/dashboard/settings", icon="fas fa-cog"))
+
+async def startup_admin(app: FastAPI):
+    admin = Admin()
+    await admin.configure(app)
+    return admin
